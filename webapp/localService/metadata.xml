@@ -1,0 +1,32 @@
+<edmx:Edmx xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx"
+	xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:sap="http://www.sap.com/Protocols/SAPData" Version="1.0">
+	<edmx:Reference xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx"
+		Uri="./IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_COMMON',Version='0001',SAP__Origin='ERP')/$value"><edmx:Include Namespace="com.sap.vocabularies.Common.v1" Alias="Common"/></edmx:Reference>
+	<edmx:DataServices m:DataServiceVersion="2.0">
+		<Schema xmlns="http://schemas.microsoft.com/ado/2008/09/edm" Namespace="ZMM_MATRES_UPD_SRV" xml:lang="en" sap:schema-version="1">
+			<EntityType Name="ZMM_MAT_RESType" sap:label="Material Reservation" sap:content-version="1">
+				<Key><PropertyRef Name="reservationId"/><PropertyRef Name="reservationItemId"/></Key><Property Name="reservationId" Type="Edm.String" Nullable="false" MaxLength="10" sap:display-format="NonNegative"
+					sap:label="Reservation Number" sap:creatable="false" sap:updatable="false"/><Property Name="uom" Type="Edm.String" MaxLength="3" sap:label="UOM" sap:creatable="false" sap:updatable="false"
+					sap:semantics="unit-of-measure"/><Property Name="reservationItemId" Type="Edm.String" Nullable="false" MaxLength="4" sap:display-format="NonNegative" sap:label="Item Number"
+					sap:creatable="false" sap:updatable="false"/><Property Name="requirementType" Type="Edm.String" MaxLength="2" sap:display-format="UpperCase" sap:label="Requirement Type"/><Property Name="requirementDate" Type="Edm.DateTime" Precision="0" sap:display-format="Date" sap:label="Requirement Date"/><Property Name="partNumber" Type="Edm.String" MaxLength="18" sap:display-format="UpperCase" sap:label="Part Number" sap:creatable="false"
+					sap:updatable="false"/><Property Name="plant" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Plant" sap:creatable="false"
+					sap:updatable="false"/><Property Name="storageLocation" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="SLoc" sap:creatable="false"
+					sap:updatable="false"/><Property Name="requirementQty" Type="Edm.Decimal" Precision="13" Scale="3" sap:unit="uom" sap:label="Required Quantity"/><Property Name="withdrawnQty" Type="Edm.Decimal" Precision="13" Scale="3" sap:unit="uom" sap:label="Delivered Quantity"
+					sap:creatable="false" sap:updatable="false"/></EntityType>
+			<EntityType Name="ZMM_MAT_RES_HDRType" sap:label="Material Reservation Header" sap:content-version="1">
+				<Key><PropertyRef Name="reservationId"/></Key><Property Name="reservationId" Type="Edm.String" Nullable="false" MaxLength="10" sap:display-format="NonNegative"
+					sap:label="Reservation Number" sap:creatable="false" sap:updatable="false"/><Property Name="baseDate" Type="Edm.DateTime" Precision="0" sap:display-format="Date" sap:label="Base Date" sap:creatable="false"
+					sap:updatable="false"/><Property Name="recipient" Type="Edm.String" MaxLength="12" sap:label="Goods Recipient" sap:creatable="false" sap:updatable="false"/><Property Name="createdBy" Type="Edm.String" MaxLength="12" sap:display-format="UpperCase" sap:label="Created By" sap:creatable="false"
+					sap:updatable="false"/><Property Name="movementType" Type="Edm.String" MaxLength="3" sap:display-format="UpperCase" sap:label="Movement Type" sap:creatable="false"
+					sap:updatable="false"/><Property Name="wbsElement" Type="Edm.String" MaxLength="24" sap:display-format="NonNegative" sap:label="WBS Element" sap:creatable="false"
+					sap:updatable="false"/><NavigationProperty Name="to_MATRES_ITEMS" Relationship="ZMM_MATRES_UPD_SRV.assoc_7336681796CA53153F0CE01AC6F8D9BC"
+					FromRole="FromRole_assoc_7336681796CA53153F0CE01AC6F8D9BC" ToRole="ToRole_assoc_7336681796CA53153F0CE01AC6F8D9BC"/></EntityType>
+			<Association Name="assoc_7336681796CA53153F0CE01AC6F8D9BC" sap:content-version="1"><End Type="ZMM_MATRES_UPD_SRV.ZMM_MAT_RES_HDRType" Multiplicity="1" Role="FromRole_assoc_7336681796CA53153F0CE01AC6F8D9BC"/><End Type="ZMM_MATRES_UPD_SRV.ZMM_MAT_RESType" Multiplicity="*" Role="ToRole_assoc_7336681796CA53153F0CE01AC6F8D9BC"/></Association>
+			<EntityContainer Name="ZMM_MATRES_UPD_SRV_Entities" m:IsDefaultEntityContainer="true" sap:supported-formats="atom json xlsx"><EntitySet Name="ZMM_MAT_RES" EntityType="ZMM_MATRES_UPD_SRV.ZMM_MAT_RESType" sap:creatable="false" sap:deletable="false"
+				sap:content-version="1"/><EntitySet Name="ZMM_MAT_RES_HDR" EntityType="ZMM_MATRES_UPD_SRV.ZMM_MAT_RES_HDRType" sap:creatable="false" sap:deletable="false"
+				sap:content-version="1"/>
+				<AssociationSet Name="assoc_7336681796CA53153F0CE01AC6F8D9BC" Association="ZMM_MATRES_UPD_SRV.assoc_7336681796CA53153F0CE01AC6F8D9BC"
+					sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1"><End EntitySet="ZMM_MAT_RES_HDR" Role="FromRole_assoc_7336681796CA53153F0CE01AC6F8D9BC"/><End EntitySet="ZMM_MAT_RES" Role="ToRole_assoc_7336681796CA53153F0CE01AC6F8D9BC"/></AssociationSet>
+			</EntityContainer><atom:link xmlns:atom="http://www.w3.org/2005/Atom" rel="self" href="./sap/ZMM_MATRES_UPD_SRV/$metadata"/><atom:link xmlns:atom="http://www.w3.org/2005/Atom" rel="latest-version" href="./sap/ZMM_MATRES_UPD_SRV/$metadata"/></Schema>
+	</edmx:DataServices>
+</edmx:Edmx>
